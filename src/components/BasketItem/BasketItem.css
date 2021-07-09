@@ -1,0 +1,61 @@
+.BasketItem {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 2px silver;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  position: relative;
+}
+
+.BasketItem .top-div p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.BasketItem button {
+  border-radius: 5px;
+}
+
+.basket-item-buttons,
+.BasketItem .view-button {
+  width: 100%;
+}
+
+.basket-item-buttons {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.basket-item-buttons > * {
+  margin-left: 10px;
+}
+
+.basket-item-buttons button {
+  width: 28px;
+  height: 28px;
+}
+
+.basket-item-buttons .delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.BasketItem .bottom-div,
+.BasketItem .view-button {
+  margin-top: 5px;
+}
+
+.BasketItem .bottom-div {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.2s ease-in-out;
+}
+
+.BasketItem .view-button {
+  text-transform: capitalize;
+  font-weight: bold;
+  padding: 2px 8px;
+}

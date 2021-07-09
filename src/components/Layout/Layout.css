@@ -1,0 +1,113 @@
+.Layout {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 90px);
+}
+
+.Layout > div:not(.SideNav) {
+  width: 100%;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.Layout > div:not(.SideNav) > button {
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px 8px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.Layout > div:not(.SideNav) > *:not(button) {
+  width: 100%;
+}
+
+.hamburger {
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  z-index: 20;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: rgb(190, 213, 223);
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.hamburger.open {
+  background-color: #4885b8;
+  transform: translateX(140px);
+}
+
+textarea {
+  resize: none;
+}
+
+.title {
+  position: absolute;
+}
+
+.title {
+  text-align: right;
+  top: 15px;
+  right: 20px;
+}
+
+.form-container {
+  position: relative;
+}
+
+.input-group {
+  width: min(500px, 100%);
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  column-gap: 5px;
+}
+
+.input-group > input {
+  width: 100%;
+}
+
+.input-group > button {
+  width: 80px;
+  height: 30px;
+  justify-self: flex-end;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 1200px) {
+  .hamburger {
+    display: none;
+  }
+
+  .Layout > div:not(.SideNav) > button {
+    right: auto;
+    left: 20px;
+  }
+
+  .title {
+    text-align: left;
+    top: 15px;
+    right: auto;
+    left: 20px;
+  }
+
+  .form-container,
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    font-size: 1.5rem;
+  }
+}

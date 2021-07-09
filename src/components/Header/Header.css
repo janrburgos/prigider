@@ -1,0 +1,45 @@
+.Header {
+  background-color: rgb(72, 133, 184);
+  color: white;
+  padding: 10px;
+  height: 90px;
+  position: relative;
+}
+
+.Header h1 {
+  font-size: 2rem;
+}
+
+.Header span {
+  color: black;
+}
+
+.Header .prigider {
+  font-family: "Dela Gothic One", cursive;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Header .prigider-brand {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.Header .fridge {
+  height: 80px;
+  display: none;
+}
+
+@media only screen and (min-width: 480px) {
+  .Header {
+    padding: 10px 20px;
+  }
+
+  .Header .fridge {
+    display: inline-block;
+  }
+}

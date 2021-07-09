@@ -1,0 +1,127 @@
+.AddRecipe .form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.AddRecipe .form-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 110px auto;
+}
+
+.AddRecipe select {
+  text-transform: capitalize;
+}
+
+.AddRecipe .form-row input,
+.AddRecipe .form-row select,
+.AddRecipe .form-row textarea {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 2px 1px silver;
+}
+
+.AddRecipe textarea {
+  height: 150px;
+}
+
+.AddRecipe .error-msg {
+  color: red;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.AddRecipe button {
+  text-transform: capitalize;
+}
+
+.AddRecipe .submit-button {
+  max-width: 200px;
+}
+
+.ingredient-display-container .ingredients-title {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.ingredient-display-container .no-ingredients {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.ingredient-display-container > p {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+}
+
+.ingredients-input {
+  border-radius: 5px;
+  box-shadow: 0 0 2px 1px silver;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: min(500px, 100%);
+  display: grid;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.ingredients-input #ingredient-unit {
+  margin-top: 10px;
+}
+
+.ingredient-added {
+  width: min(500px, 100%);
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  overflow: hidden;
+}
+
+.ingredient-added span {
+  text-transform: capitalize;
+}
+
+.ingredient-added button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .ingredient-display-container > p,
+  .ingredients-input {
+    margin-left: 110px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .AddRecipe .form-container {
+    margin-top: 15px;
+    gap: 10px;
+  }
+
+  .AddRecipe .form-row {
+    gap: 20px;
+    grid-template-columns: 200px auto;
+  }
+
+  .ingredients-input .form-row {
+    gap: 20px;
+    grid-template-columns: 110px auto;
+  }
+
+  .AddRecipe label {
+    text-align: right;
+  }
+
+  .ingredient-display-container > p,
+  .ingredients-input {
+    margin-left: 220px;
+  }
+}

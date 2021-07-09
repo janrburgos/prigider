@@ -1,0 +1,70 @@
+.RecipeBox {
+  background-color: #fff;
+  box-shadow: 0 2px 2px 2px silver;
+  border-radius: 5px;
+  padding: 10px 10px 45px 10px;
+  position: relative;
+}
+
+.RecipeBox .recipe-name {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  max-width: calc(100% - 80px);
+  margin: 0 auto;
+}
+
+.RecipeBox .ingredient-title {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.RecipeBox li {
+  margin-bottom: 5px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+  position: relative;
+}
+
+.RecipeBox li .warning {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  border-radius: 50%;
+  position: absolute;
+  left: -30px;
+  cursor: help;
+}
+
+.RecipeBox .button-group {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.RecipeBox .basket-button-group {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.RecipeBox button {
+  text-transform: uppercase;
+  padding: 5px;
+  border-radius: 5px;
+  width: 38px;
+  height: 36px;
+}

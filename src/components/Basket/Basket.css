@@ -1,0 +1,10 @@
+.Basket .confirm-button {
+  left: 60px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .Basket .empty-button {
+    right: 20px !important;
+    left: auto !important;
+  }
+}

@@ -1,0 +1,97 @@
+.LoginPage .loading-container {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.LoginPage .login-page-container {
+  height: calc(100vh - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoginPage .prigider {
+  justify-content: center;
+}
+
+.LoginPage .fridge {
+  display: inline-block;
+}
+
+.login-error {
+  color: red;
+  width: 100%;
+  text-align: center;
+}
+
+.login-box p,
+.login-box button,
+.login-box input {
+  font-size: 1.2rem;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 2px silver;
+}
+
+.login-box input {
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 3px 1px silver;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.login-box input:focus {
+  outline: none;
+  box-shadow: 0 0 10px 2px silver;
+}
+
+.login-box p {
+  font-weight: bold;
+  text-align: center;
+  width: calc(100% - 40px);
+  margin-bottom: 0;
+}
+
+.login-box button {
+  width: 80px;
+  padding: 5px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.register-message {
+  margin-top: 5px;
+}
+
+.link-hover,
+.show-hide-password {
+  cursor: pointer;
+  color: rgb(72, 133, 184);
+}
+
+.link-hover:hover,
+.show-hide-password:hover {
+  text-decoration: underline;
+}
+
+.show-hide-password {
+  align-self: start;
+  margin-left: 18px;
+  font-size: 0.8rem;
+}

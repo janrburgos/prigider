@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: inherit !important;
+  color: inherit !important;
+}
+
+input, select {
+  padding-left: 1.5%;
+}
+
+textarea {
+  padding-left: 1.5%;
+  resize: none !important;
+}
+
+body {
+  width: 100%;
+  background-color: #f0f0f0 !important;
+}

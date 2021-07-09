@@ -1,0 +1,58 @@
+.AddIngredient .form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.AddIngredient .form-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100px auto;
+}
+
+.AddIngredient select {
+  text-transform: capitalize;
+}
+
+.AddIngredient .form-row input,
+.AddIngredient .form-row select,
+.AddIngredient .form-row textarea {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 2px 1px silver;
+}
+
+.AddIngredient textarea {
+  height: 150px;
+}
+
+.AddIngredient .error-msg {
+  color: red;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.AddIngredient button {
+  text-transform: capitalize;
+  max-width: 200px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .AddIngredient {
+    width: 60%;
+  }
+  .AddIngredient .form-container {
+    margin-top: 15px;
+    gap: 10px;
+  }
+
+  .AddIngredient .form-row {
+    gap: 20px;
+    grid-template-columns: 200px auto;
+  }
+
+  .AddIngredient label {
+    text-align: right;
+  }
+}

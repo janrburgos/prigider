@@ -1,0 +1,135 @@
+.InventoryItem,
+.InventoryItem .top-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.InventoryItem {
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 2px silver;
+  padding: 5px;
+  margin-bottom: 10px;
+  position: relative;
+  flex-direction: column;
+}
+
+.InventoryItem .top-div > div {
+  display: flex;
+}
+
+.InventoryItem select {
+  width: 120px;
+  margin-left: 5px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 1px silver;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.InventoryItem .inventory-item-name {
+  width: calc(100% - 66px);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.InventoryItem .ingredient-button-group,
+.InventoryItem .ingredient-button-group > div {
+  display: flex;
+  gap: 5px;
+}
+
+.InventoryItem .ingredient-button-group {
+  position: absolute;
+  right: 5px;
+  flex-direction: column-reverse;
+}
+
+.InventoryItem .ingredient-button-group button {
+  border-radius: 5px;
+  width: 28px;
+  height: 28px;
+}
+
+.InventoryItem .ingredient-button-group .increase-inventory-button,
+.InventoryItem .ingredient-button-group .reduce-inventory-button {
+  color: white;
+  font-weight: bold;
+}
+
+.InventoryItem .ingredient-button-group .increase-inventory-button {
+  background-color: green;
+}
+
+.InventoryItem .ingredient-button-group .reduce-inventory-button {
+  background-color: red;
+}
+
+.InventoryItem .bottom-div {
+  overflow: hidden;
+  transition: height 0.2s ease-in-out, visibility 0.2s linear;
+}
+
+.InventoryItem .bottom-div-content label {
+  text-transform: capitalize;
+}
+
+.InventoryItem .bottom-div-content p {
+  margin-bottom: 0;
+}
+
+.InventoryItem .bottom-div-content.update-inventory {
+  border: 1px solid silver;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.InventoryItem .input-row {
+  display: grid;
+  grid-template-columns: 100px auto;
+  gap: 5px;
+}
+
+.InventoryItem .input-row input {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 2px 1px silver;
+  padding: 0 5px;
+}
+
+.InventoryItem .input-row select {
+  margin-left: 0;
+}
+
+.InventoryItem .bottom-button-group {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.InventoryItem .bottom-button-group > button {
+  flex: 1;
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 1200px) {
+  .InventoryItem .inventory-item-name {
+    width: calc(100% - 132px);
+  }
+
+  .InventoryItem .ingredient-button-group {
+    flex-direction: row;
+  }
+}
