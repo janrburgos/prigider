@@ -1,6 +1,7 @@
 import "./AddIngredient.css";
 
 import axios from "axios";
+import ReactLoading from "react-loading";
 import React, { useState, useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 
@@ -19,6 +20,7 @@ const AddIngredient = ({
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const [totalCost, setTotalCost] = useState(0);
   const [ingredientId, setIngredientId] = useState("");
   const [displayUnit, setDisplayUnit] = useState("gram");
@@ -55,6 +57,7 @@ const AddIngredient = ({
     } else if (density < 0.001 && displayUnit !== "piece") {
       setErrorMsg("Density must not be less than 0.001");
     } else {
+      setLoading(true);
       let convertedQuantity;
       // conversions
       if (displayUnit !== "piece") {
@@ -109,7 +112,18 @@ const AddIngredient = ({
                   "ingredients",
                   JSON.stringify(res.data.ingredients)
                 );
+
+                setLoading(false);
+                alert(
+                  `Ingredient ${name
+                    .trim()
+                    .toUpperCase()} has been added to the inventory`
+                );
               });
+          })
+          .catch(() => {
+            setLoading(false);
+            alert("communication error");
           });
       } else {
         axios
@@ -128,6 +142,16 @@ const AddIngredient = ({
           )
           .then((res) => {
             dispatch({ type: "CONFIRM_EDIT_INGREDIENT", payload: res.data });
+            setLoading(false);
+            alert(
+              `Ingredient ${name
+                .trim()
+                .toUpperCase()} has been added to the inventory`
+            );
+          })
+          .catch(() => {
+            setLoading(false);
+            alert("communication error");
           });
       }
 
@@ -141,12 +165,6 @@ const AddIngredient = ({
       setLocation("");
       setIngredientId("");
       setErrorMsg("");
-
-      alert(
-        `Ingredient ${name
-          .trim()
-          .toUpperCase()} has been added to the inventory`
-      );
     }
   };
 
@@ -172,6 +190,15 @@ const AddIngredient = ({
 
   return (
     <div className="AddIngredient">
+      {loading && (
+        <div className="loading-container">
+          <ReactLoading
+            type={"spokes"}
+            color={"rgb(72, 133, 184)"}
+            width={50}
+          />
+        </div>
+      )}
       <h2 className="title">{ingredientIsEdit ? "Edit" : "Add"} Ingredient</h2>
       <div className="form-container">
         <div className="form-row">

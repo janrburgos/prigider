@@ -1,6 +1,7 @@
 import "./RecipeBox.css";
 
 import axios from "axios";
+import ReactLoading from "react-loading";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,10 +11,12 @@ const RecipeBox = ({ recipe, notEnough, notInBasket, basketCounter }) => {
   const restaurant = useSelector((state) => state.restaurant);
   const ingredientsSelector = useSelector((state) => state.ingredients);
   const [ingredients, setIngredients] = useState(ingredientsSelector);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const deleteButtonClickHandler = (name) => {
+    setLoading(true);
     if (
       window.confirm(`Are you sure you want to delete ${name.toUpperCase()}?`)
     ) {
@@ -54,12 +57,18 @@ const RecipeBox = ({ recipe, notEnough, notInBasket, basketCounter }) => {
                   "ingredients",
                   JSON.stringify(res.data[0].ingredients)
                 );
+
+                setLoading(false);
+                alert(`${name.toUpperCase()} has been deleted`);
               });
             });
+        })
+        .catch(() => {
+          setLoading(false);
+          alert("communication error");
         });
 
       dispatch({ type: "EMPTY_BASKET", payload: "empty" });
-      alert(`${name.toUpperCase()} has been deleted`);
     }
   };
 
@@ -86,6 +95,15 @@ const RecipeBox = ({ recipe, notEnough, notInBasket, basketCounter }) => {
       className="RecipeBox"
       style={notEnough ? { backgroundColor: "silver" } : null}
     >
+      {loading && (
+        <div className="loading-container">
+          <ReactLoading
+            type={"spokes"}
+            color={"rgb(72, 133, 184)"}
+            width={50}
+          />
+        </div>
+      )}
       <div>
         <div className="recipe-name">{recipe.name}</div>
         <p className="ingredient-title">Ingredients:</p>

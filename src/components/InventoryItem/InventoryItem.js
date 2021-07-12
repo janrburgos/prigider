@@ -3,6 +3,7 @@ import "./InventoryItem.css";
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import ReactLoading from "react-loading";
 import axios from "axios";
 
 const InventoryItem = ({ ingredient }) => {
@@ -10,6 +11,7 @@ const InventoryItem = ({ ingredient }) => {
   const weightUnits = useSelector((state) => state.weightUnits);
   const volumeUnits = useSelector((state) => state.volumeUnits);
   const ingredients = useSelector((state) => state.ingredients);
+  const [loading, setLoading] = useState(false);
   const [expand, setExpand] = useState("closed");
   const [updateType, setUpdateType] = useState("");
   const [unit, setUnit] = useState(ingredient.displayUnit);
@@ -30,6 +32,7 @@ const InventoryItem = ({ ingredient }) => {
     if (
       window.confirm(`Are you sure you want to delete ${name.toUpperCase()}?`)
     ) {
+      setLoading(true);
       axios
         .delete(
           `https://prigider-be.herokuapp.com/api/ingredients/${ingredient._id}`
@@ -71,11 +74,17 @@ const InventoryItem = ({ ingredient }) => {
                 "recipes",
                 JSON.stringify(restaurantData.recipes)
               );
+
+              setLoading(false);
+              alert(`${name.toUpperCase()} has been deleted`);
             });
+        })
+        .catch(() => {
+          setLoading(false);
+          alert("communication error");
         });
 
       dispatch({ type: "EMPTY_BASKET", payload: "empty" });
-      alert(`${name.toUpperCase()} has been deleted`);
     }
   };
 
@@ -92,6 +101,7 @@ const InventoryItem = ({ ingredient }) => {
   };
 
   const changeInventoryQuantityClickHandler = () => {
+    setLoading(true);
     dispatch({ type: "EMPTY_BASKET", payload: "empty" });
 
     let convertedQuantity = Number(updateQuantity);
@@ -133,12 +143,17 @@ const InventoryItem = ({ ingredient }) => {
               "ingredients",
               JSON.stringify(res.data[0].ingredients)
             );
+
+            setLoading(false);
+            alert(
+              `${ingredient.name.toUpperCase()} has been successfully updated`
+            );
           });
         })
-        .catch((err) => {
-          return console.error(err);
+        .catch(() => {
+          setLoading(false);
+          alert("communication error");
         });
-      alert(`${ingredient.name.toUpperCase()} has been successfully updated`);
     } else {
       let newQuantity = ingredient.quantity - convertedQuantity;
       if (newQuantity < 0) {
@@ -170,12 +185,17 @@ const InventoryItem = ({ ingredient }) => {
               "ingredients",
               JSON.stringify(res.data[0].ingredients)
             );
+
+            setLoading(false);
+            alert(
+              `${ingredient.name.toUpperCase()} has been successfully updated`
+            );
           });
         })
-        .catch((err) => {
-          return console.error(err);
+        .catch(() => {
+          setLoading(false);
+          alert("communication error");
         });
-      alert(`${ingredient.name.toUpperCase()} has been successfully updated`);
     }
 
     bottomButtonClickHandler();
@@ -214,6 +234,15 @@ const InventoryItem = ({ ingredient }) => {
 
   return (
     <div className="InventoryItem">
+      {loading && (
+        <div className="loading-container">
+          <ReactLoading
+            type={"spokes"}
+            color={"rgb(72, 133, 184)"}
+            width={50}
+          />
+        </div>
+      )}
       <div className="ingredient-button-group">
         <div>
           <button

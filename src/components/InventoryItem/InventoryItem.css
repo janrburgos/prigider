@@ -14,6 +14,18 @@
   flex-direction: column;
 }
 
+.InventoryItem .loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
 .InventoryItem .top-div > div {
   display: flex;
 }

@@ -28,7 +28,7 @@ const RecipesList = () => {
       return setDisplayRecipes(recipes);
     }
     let filteredRecipes = recipes.filter(
-      (ingredient) => ingredient.name.indexOf(searchInput) !== -1
+      (ingredient) => ingredient._id.indexOf(searchInput) !== -1
     );
     setDisplayRecipes(filteredRecipes);
   };
@@ -56,7 +56,7 @@ const RecipesList = () => {
 
       recipe.recipeIngredients.forEach((recipeIngredient) => {
         const ingredientToCompare = ingredients.find(
-          (ingredient) => ingredient.name === recipeIngredient.name
+          (ingredient) => ingredient._id === recipeIngredient.ingredient._id
         );
         if (
           ingredientToCompare === undefined ||
@@ -77,7 +77,7 @@ const RecipesList = () => {
 
       recipe.recipeIngredients.forEach((recipeIngredient) => {
         const ingredientToCompare = ingredients.find(
-          (ingredient) => ingredient.name === recipeIngredient.name
+          (ingredient) => ingredient._id === recipeIngredient.ingredient._id
         );
         if (
           ingredientToCompare === undefined ||
@@ -163,7 +163,7 @@ const RecipesList = () => {
               }
               const ingredientToCompare = ingredients.find(
                 (ingredient) =>
-                  ingredient.name === recipeIngredient.ingredient.name
+                  ingredient._id === recipeIngredient.ingredient._id
               );
               if (
                 ingredientToCompare === undefined ||

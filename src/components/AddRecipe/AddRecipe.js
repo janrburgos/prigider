@@ -1,6 +1,7 @@
 import "./AddRecipe.css";
 
 import axios from "axios";
+import ReactLoading from "react-loading";
 import React, { useState, useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 
@@ -26,6 +27,7 @@ const AddRecipe = ({
   const [ingredientDisplayUnit, setIngredientDisplayUnit] = useState("");
   // other states
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const [ingredientErrorMsg, setIngredientErrorMsg] = useState("");
 
   let recipeCategories = recipes.map((recipe) => recipe.category);
@@ -90,6 +92,7 @@ const AddRecipe = ({
     } else if (recipeIngredients.length === 0) {
       setErrorMsg("There should be at least one ingredient");
     } else {
+      setLoading(true);
       // get recipeIngredients array and convert to ingredient ids only
       let newRecipeIngredients = recipeIngredients.map((ingredient) => {
         return { ...ingredient, ingredient: ingredient.ingredient._id };
@@ -127,7 +130,18 @@ const AddRecipe = ({
                   "recipes",
                   JSON.stringify(res.data.recipes)
                 );
+
+                setLoading(false);
+                alert(
+                  `Recipe ${name
+                    .trim()
+                    .toUpperCase()} has been added to the recipe list`
+                );
               });
+          })
+          .catch(() => {
+            setLoading(false);
+            alert("communication error");
           });
       } else {
         axios
@@ -144,6 +158,17 @@ const AddRecipe = ({
               recipe._id === res.data._id ? res.data : recipe
             );
             localStorage.setItem("recipes", JSON.stringify(oldRecipes));
+
+            setLoading(false);
+            alert(
+              `Recipe ${name
+                .trim()
+                .toUpperCase()} has been added to the recipe list`
+            );
+          })
+          .catch(() => {
+            setLoading(false);
+            alert("communication error");
           });
       }
 
@@ -157,10 +182,6 @@ const AddRecipe = ({
       setIngredientDisplayUnit("");
       setErrorMsg("");
       setIngredientErrorMsg("");
-
-      alert(
-        `Recipe ${name.trim().toUpperCase()} has been added to the recipe list`
-      );
     }
   };
 
@@ -208,6 +229,15 @@ const AddRecipe = ({
 
   return (
     <div className="AddRecipe">
+      {loading && (
+        <div className="loading-container">
+          <ReactLoading
+            type={"spokes"}
+            color={"rgb(72, 133, 184)"}
+            width={50}
+          />
+        </div>
+      )}
       <h2 className="title">{recipeIsEdit ? "Edit" : "Add"} Recipe</h2>
       <div className="form-container">
         <div className="form-row">

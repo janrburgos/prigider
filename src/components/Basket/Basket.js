@@ -2,16 +2,21 @@ import "./Basket.css";
 import BasketItem from "../BasketItem/BasketItem";
 
 import axios from "axios";
+import React, { useState } from "react";
+import ReactLoading from "react-loading";
 import { useSelector, useDispatch } from "react-redux";
 
 const Basket = () => {
   const basket = useSelector((state) => state.basket);
   const restaurant = useSelector((state) => state.restaurant);
   const ingredients = useSelector((state) => state.ingredients);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const confirmBasketClickHandler = () => {
+    setLoading(true);
+
     if (
       window.confirm("Do you want to update your inventory with these recipes?")
     ) {
@@ -63,39 +68,48 @@ const Basket = () => {
         };
       });
 
-      // put request on every reduced ingredients and update all redux
-      const ingredientPutRequests = async () => {
-        reducedIngredients.forEach((ingredient) => {
-          axios.put(
+      // update all ingredients to reduce and update all redux and localStorage
+
+      reducedIngredients.forEach((ingredient, index) => {
+        axios
+          .put(
             `https://prigider-be.herokuapp.com/api/ingredients/${ingredient._id}`,
             {
               quantity: ingredient.quantity,
               totalCost: ingredient.totalCost,
             }
-          );
-        });
-      };
-
-      ingredientPutRequests()
-        .then(() => {
-          axios(
-            `https://prigider-be.herokuapp.com/api/restaurant/${restaurant.username}`
-          ).then((res) => {
-            dispatch({
-              type: "UPDATE_INGREDIENTS",
-              payload: res.data[0].ingredients,
-            });
-            localStorage.setItem(
-              "ingredients",
-              JSON.stringify(res.data[0].ingredients)
-            );
+          )
+          .then(() => {
+            if (index === reducedIngredients.length - 1) {
+              axios(
+                `https://prigider-be.herokuapp.com/api/restaurant/${restaurant.username}`
+              )
+                .then((res) => {
+                  console.log(res.data);
+                  dispatch({
+                    type: "UPDATE_INGREDIENTS",
+                    payload: res.data[0].ingredients,
+                  });
+                  localStorage.setItem(
+                    "ingredients",
+                    JSON.stringify(res.data[0].ingredients)
+                  );
+                  setLoading(false);
+                  alert("Inventory updated");
+                })
+                .catch(() => {
+                  setLoading(false);
+                  return alert("error in updating page");
+                });
+            }
+          })
+          .catch(() => {
+            setLoading(false);
+            return alert("error in updating ingredients");
           });
-        })
-        .then(() => {
-          dispatch({ type: "EMPTY_BASKET", payload: "confirm" });
-          alert("Inventory updated");
-        });
+      });
     }
+    dispatch({ type: "EMPTY_BASKET", payload: "confirm" });
   };
 
   const emptyBasketClickHandler = () => {
@@ -107,6 +121,15 @@ const Basket = () => {
 
   return (
     <div className="Basket">
+      {loading && (
+        <div className="loading-container">
+          <ReactLoading
+            type={"spokes"}
+            color={"rgb(72, 133, 184)"}
+            width={50}
+          />
+        </div>
+      )}
       <button
         className="btn btn-success confirm-button"
         onClick={confirmBasketClickHandler}
