@@ -15,11 +15,10 @@ const Basket = () => {
   const dispatch = useDispatch();
 
   const confirmBasketClickHandler = () => {
-    setLoading(true);
-
     if (
       window.confirm("Do you want to update your inventory with these recipes?")
     ) {
+      setLoading(true);
       // group all ingredients from recipes from the basket into one array
       let ingredientsForReduction = [];
       basket.forEach((item) => {

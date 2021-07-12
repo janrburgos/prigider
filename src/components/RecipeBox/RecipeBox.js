@@ -16,10 +16,10 @@ const RecipeBox = ({ recipe, notEnough, notInBasket, basketCounter }) => {
   const dispatch = useDispatch();
 
   const deleteButtonClickHandler = (name) => {
-    setLoading(true);
     if (
       window.confirm(`Are you sure you want to delete ${name.toUpperCase()}?`)
     ) {
+      setLoading(true);
       axios
         .delete(`https://prigider-be.herokuapp.com/api/recipe/${recipe._id}`)
         .then(async (res) => {
